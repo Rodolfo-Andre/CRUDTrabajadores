@@ -1,0 +1,67 @@
+﻿@model CRUDTrabajadores.Models.Trabajador
+
+@{
+    ViewData["Title"] = "Detalle del Trabajador - " + @Model.Id;
+}
+
+<h1 class="text-center">DETALLE DEL TRABAJADOR - @Model.Id</h1>
+
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.TipoDocumento)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.TipoDocumento)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.NumeroDocumento)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.NumeroDocumento)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Nombres)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Nombres)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Sexo)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Sexo)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Departamento)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Departamento!.NombreDepartamento)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Provincia)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Provincia!.NombreProvincia)
+        </dd>
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.Distrito)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.Distrito!.NombreDistrito)
+        </dd>
+    </dl>
+</div>
+<div>
+    
+    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model?.Id"><i class="bi bi-pencil-square"></i> Editar</a>
+    <a class="btn btn-dark" asp-action="Index"><i class="bi bi-arrow-left-square-fill"></i> Ir al inicio</a>
+</div>

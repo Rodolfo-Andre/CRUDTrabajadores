@@ -1,0 +1,71 @@
+﻿@model CRUDTrabajadores.Models.Trabajador
+
+@{
+    ViewData["Title"] = "Eliminación del trabajador - " + @Model.Id;
+}
+
+<h1 class="text-center">ELIMINAR TRABAJADOR - @Model.Id</h1>
+
+<h3>¿Estás seguro de eliminar?</h3>
+
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.TipoDocumento)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.TipoDocumento)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.NumeroDocumento)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.NumeroDocumento)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Nombres)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Nombres)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Sexo)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Sexo)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Departamento)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Departamento!.NombreDepartamento)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Provincia)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Provincia!.NombreProvincia)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Distrito)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Distrito!.NombreDistrito)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button class="btn btn-danger" type="submit"><i class="bi bi-trash-fill"></i> Eliminar</button>
+        <a class="btn btn-dark" asp-action="Index">
+            <i class="bi bi-arrow-left-square-fill"></i> Ir al inicio
+        </a>
+    </form>
+</div>

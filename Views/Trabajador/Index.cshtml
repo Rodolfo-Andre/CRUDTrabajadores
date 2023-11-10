@@ -1,0 +1,111 @@
+﻿@model IEnumerable<CRUDTrabajadores.Models.Trabajador>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">LISTA DE TRABAJADORES</h1>
+
+<div class="my-3">
+    <form asp-action="Index" method="GET">
+        <div class="d-flex gap-3">
+            <div>
+                <label class="control-label">Buscar por nombres</label>
+                <input class="form-control" name="nombre" value="@ViewBag.nombre" />
+            </div>
+
+            <div class="align-self-end">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i> Buscar</button>
+            </div>
+
+            <div class="align-self-end">
+                <a class="btn btn-danger" asp-action="Index"><i class="bi bi-trash"></i> Limpiar</a>
+            </div>
+        </div>  
+    </form>
+</div>
+
+
+<p>
+    <a class="btn btn-primary" asp-action="Create"><i class="bi bi-person-fill-add"></i> Agregar Trabajador</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TipoDocumento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumeroDocumento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombres)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sexo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Departamento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Provincia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Distrito)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="align-middle">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoDocumento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumeroDocumento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombres)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sexo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Departamento!.NombreDepartamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Provincia!.NombreProvincia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Distrito!.NombreDistrito)
+                    </td>
+                    <td>
+                        <div class="d-flex flex-column gap-3">
+                            <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i> Editar</a>
+                            <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-receipt"></i> Detalle</a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill"></i> Eliminar</a>
+                        </div>
+                       
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

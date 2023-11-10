@@ -1,0 +1,124 @@
+﻿@model CRUDTrabajadores.Models.Trabajador
+
+@{
+    ViewData["Title"] = "Crear un nuevo trabajador";
+}
+
+<h1 class="text-center">CREAR TRABAJADOR</h1>
+
+<hr />
+
+
+<form asp-action="Create">
+    <div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row my-3">
+            <div class="form-group col-12 col-md-6">
+                <label asp-for="Nombres" class="control-label"></label>
+                <input asp-for="Nombres" class="form-control" />
+                <span asp-validation-for="Nombres" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col-12 col-md-6">
+                <label asp-for="Sexo" class="control-label"></label>
+                <select asp-for="Sexo" class="form-control" asp-items="ViewBag.SelectSexo"></select>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="form-group  col-12 col-md-4">
+                <label asp-for="TipoDocumento" class="control-label"></label>
+                <select asp-for="TipoDocumento" class="form-control" asp-items="ViewBag.SelectTipoDocumento"></select>
+            </div>
+
+            <div class="form-group col-12 col-md-4">
+                <label asp-for="NumeroDocumento" class="control-label"></label>
+                <input asp-for="NumeroDocumento" class="form-control" />
+                <span asp-validation-for="NumeroDocumento" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group col-12 col-md-4">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row  my-3">
+            <div class="form-group col-12 col-md-4">
+                <label asp-for="DepartamentoId" class="control-label"></label>
+                <select asp-for="DepartamentoId" id="departamento" class="form-control" asp-items="ViewBag.DepartamentoId"></select>
+            </div>
+            <div class="form-group col-12 col-md-4">
+                <label asp-for="ProvinciaId" class="control-label"></label>
+                <select asp-for="ProvinciaId" id="provincia" class="form-control" asp-items="ViewBag.ProvinciaId"></select>
+            </div>
+            <div class="form-group col-12 col-md-4">
+                <label asp-for="DistritoId" class="control-label"></label>
+                <select asp-for="DistritoId" id="distrito" class="form-control" asp-items="ViewBag.DistritoId"></select>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="form-group col-auto">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-plus-circle-fill"></i> Crear</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="my-3">
+    <a class="btn btn-dark" asp-action="Index">
+        <i class="bi bi-arrow-left-square-fill"></i> Ir al inicio
+    </a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@section ScriptsCustom {
+    <script>
+        $(document).ready(function () {
+            $('#departamento').on('change', function () {
+                var departamentoSeleccionado = $(this).val();
+
+                $.ajax({
+                    url: `/api/rest/provincia/${departamentoSeleccionado}`,
+                    method: 'GET',
+                    success: function (provincias) {
+                        $('#provincia').empty();
+
+                        $.each(provincias, function (index, value) {
+                            $('#provincia').append('<option value="' + value.id + '">' + value.nombreProvincia + '</option>');
+                        });
+
+                        $('#provincia').trigger('change');
+                    }
+                });
+            });
+
+            $('#provincia').on('change', function () {
+                var provinciaSeleccionada = $(this).val();
+
+                $.ajax({
+                    url: `/api/rest/distrito/${provinciaSeleccionada}`,
+                    method: 'GET',
+                    data: { provincia: provinciaSeleccionada },
+                    success: function (distritos) {
+                        $('#distrito').empty();
+
+                        $.each(distritos, function (index, value) {
+                            $('#distrito').append('<option value="' + value.id + '">' + value.nombreDistrito + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
