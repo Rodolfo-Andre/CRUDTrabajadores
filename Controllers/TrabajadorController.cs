@@ -88,8 +88,8 @@ namespace CRUDTrabajadores.Controllers
             ViewData["SelectSexo"] = new SelectList(listaSexo, "Valor", "Valor", trabajador.Sexo);
             ViewData["SelectTipoDocumento"] = new SelectList(listaTipoDocumento, "Valor", "Valor", trabajador.TipoDocumento);
             ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "Id", "NombreDepartamento", trabajador.DepartamentoId);
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincia, "Id", "NombreProvincia", trabajador.ProvinciaId);
-            ViewData["DistritoId"] = new SelectList(_context.Distrito, "Id", "NombreDistrito", trabajador.DistritoId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincia.Where(p => p.DepartamentoId == trabajador.DepartamentoId), "Id", "NombreProvincia", trabajador.ProvinciaId);
+            ViewData["DistritoId"] = new SelectList(_context.Distrito.Where(d => d.ProvinciaId == trabajador.ProvinciaId), "Id", "NombreDistrito", trabajador.DistritoId);
             return View(trabajador);
         }
 
@@ -110,8 +110,8 @@ namespace CRUDTrabajadores.Controllers
             ViewData["SelectSexo"] = new SelectList(listaSexo, "Valor", "Valor", trabajador.Sexo);
             ViewData["SelectTipoDocumento"] = new SelectList(listaTipoDocumento, "Valor", "Valor", trabajador.TipoDocumento);
             ViewData["DepartamentoId"] = new SelectList(_context.Departamento, "Id", "NombreDepartamento", trabajador.DepartamentoId);
-            ViewData["ProvinciaId"] = new SelectList(_context.Provincia, "Id", "NombreProvincia", trabajador.ProvinciaId);
-            ViewData["DistritoId"] = new SelectList(_context.Distrito, "Id", "NombreDistrito", trabajador.DistritoId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincia.Where(p => p.DepartamentoId == trabajador.DepartamentoId), "Id", "NombreProvincia", trabajador.ProvinciaId);
+            ViewData["DistritoId"] = new SelectList(_context.Distrito.Where(d => d.ProvinciaId == trabajador.ProvinciaId), "Id", "NombreDistrito", trabajador.DistritoId);
             return View(trabajador);
         }
 
